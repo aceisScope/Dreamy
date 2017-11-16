@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ((DreamyApplication) getApplication()).getNetworkComponent().inject(this);
+        ((DreamyApplication) getApplication()).component().inject(this);
 
         shotsList.enqueue(new Callback<List<Shot>>() {
             @Override public void onResponse(Call<List<Shot>> call, Response<List<Shot>> response) {
