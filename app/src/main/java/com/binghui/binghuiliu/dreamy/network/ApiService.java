@@ -17,7 +17,4 @@ import rx.Observable;
 public interface ApiService {
     @GET("teams/{team}/shots?page=2&access_token=8432422eabc3c6a951b5424701181653b6a18096219a88c7dd52c815ef25bf24")
     Observable<List<Shot>> getShotsList(@Path("team") String team);
-
-    @GET("teams/{team}/shots?page=2&access_token=8432422eabc3c6a951b5424701181653b6a18096219a88c7dd52c815ef25bf24")
-    Call<List<Shot>> shotsList(@Path("team") String team);
 }
