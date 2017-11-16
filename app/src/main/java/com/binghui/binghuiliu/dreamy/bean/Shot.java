@@ -1,4 +1,4 @@
-package com.binghui.binghuiliu.dreamy.model;
+package com.binghui.binghuiliu.dreamy.bean;
 
 import android.os.Parcel;
 import android.os.Parcelable;
