@@ -11,7 +11,7 @@ import dagger.Component;
  */
 
 @Singleton
-@Component(modules = {NetworkModule.class})
+@Component(modules = {ApiModule.class})
 public interface NetworkComponent {
     void inject(MainActivity mainActivity);
 }

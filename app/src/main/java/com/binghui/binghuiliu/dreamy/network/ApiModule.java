@@ -17,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 @Module
-public class NetworkModule {
+public class ApiModule {
     public static final String baseURL = "https://api.dribbble.com/v1/";
     public static final String team = "kit8";
 
@@ -35,7 +35,7 @@ public class NetworkModule {
     @Provides
     Call<List<Shot>> prodiveShotsList(Retrofit retrofit) {
         return retrofit
-                .create(ShotService.class)
+                .create(ApiService.class)
                 .shotsList(team);
     }
 }
