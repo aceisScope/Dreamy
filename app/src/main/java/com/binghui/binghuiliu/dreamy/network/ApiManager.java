@@ -1,6 +1,9 @@
 package com.binghui.binghuiliu.dreamy.network;
 
+import android.app.Application;
+
 import com.binghui.binghuiliu.dreamy.R;
+import com.binghui.binghuiliu.dreamy.app.ApplicationModule;
 import com.binghui.binghuiliu.dreamy.bean.Shot;
 
 import java.util.List;
@@ -28,7 +31,7 @@ public class ApiManager {
 
     private static final ApiService apiService = sRetrofit.create(ApiService.class);
 
-    public static Observable<List<Shot>> getShotsList() {
-        return apiService.getShotsList(team, ""); // Should get access token from resource file
+    public static Observable<List<Shot>> getShotsList(Application application) {
+        return apiService.getShotsList(team, application.getString(R.string.access_token));
     }
 }

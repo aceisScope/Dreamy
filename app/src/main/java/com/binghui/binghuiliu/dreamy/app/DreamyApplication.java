@@ -1,4 +1,4 @@
-package com.binghui.binghuiliu.dreamy;
+package com.binghui.binghuiliu.dreamy.app;
 
 import android.app.Application;
 import android.content.Context;
@@ -8,10 +8,7 @@ import android.content.Context;
  */
 
 public class DreamyApplication extends Application {
-
-    public static DreamyApplication get(Context context){
-        return (DreamyApplication) context.getApplicationContext();
-    }
+    
 
     @Override
     public void onCreate() {

@@ -1,8 +1,10 @@
 package com.binghui.binghuiliu.dreamy.ui;
 
+import android.app.Application;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.binghui.binghuiliu.dreamy.app.ApplicationModule;
 import com.binghui.binghuiliu.dreamy.bean.Shot;
 import com.binghui.binghuiliu.dreamy.network.ApiManager;
 
@@ -20,13 +22,15 @@ import rx.schedulers.Schedulers;
  */
 
 public class ShotsPresenter {
-    public ShotsPresenter () {
-    }
-
+    private Application mApplication;
     private Subscription mSubscription;
 
+    public ShotsPresenter (Application application) {
+        this.mApplication = application;
+    }
+
     public void getShotList() {
-        mSubscription = ApiManager.getShotsList()
+        mSubscription = ApiManager.getShotsList(mApplication)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<List<Shot>>() {

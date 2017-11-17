@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.binghui.binghuiliu.dreamy.R;
 //import com.binghui.binghuiliu.dreamy.ui.DaggerShotsPresenterComponent;
+import com.binghui.binghuiliu.dreamy.app.ApplicationModule;
 import com.binghui.binghuiliu.dreamy.ui.ShotsPresenter;
 
 import javax.inject.Inject;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     protected void setupComponent() {
         DaggerShotsPresenterComponent
                 .builder()
+                .applicationModule(new ApplicationModule(getApplication()))
                 .shotsPresenterModule(new ShotsPresenterModule())
                 .build()
                 .inject(this);

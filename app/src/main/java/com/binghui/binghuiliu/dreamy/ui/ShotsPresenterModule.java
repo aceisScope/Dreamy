@@ -1,5 +1,7 @@
 package com.binghui.binghuiliu.dreamy.ui;
 
+import android.app.Application;
+
 import dagger.Module;
 import dagger.Provides;
 
@@ -10,7 +12,7 @@ import dagger.Provides;
 @Module
 public class ShotsPresenterModule {
     @Provides
-    ShotsPresenter providesShotsPresenter() {
-        return new ShotsPresenter();
+    ShotsPresenter providesShotsPresenter(Application application) {
+        return new ShotsPresenter(application);
     }
 }
