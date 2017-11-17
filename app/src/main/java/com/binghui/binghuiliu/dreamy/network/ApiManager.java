@@ -1,5 +1,6 @@
 package com.binghui.binghuiliu.dreamy.network;
 
+import com.binghui.binghuiliu.dreamy.R;
 import com.binghui.binghuiliu.dreamy.bean.Shot;
 
 import java.util.List;
@@ -28,6 +29,6 @@ public class ApiManager {
     private static final ApiService apiService = sRetrofit.create(ApiService.class);
 
     public static Observable<List<Shot>> getShotsList() {
-        return apiService.getShotsList(team);
+        return apiService.getShotsList(team, ""); // Should get access token from resource file
     }
 }

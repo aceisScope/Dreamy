@@ -1,3 +1,6 @@
+# Token
+app/src/main/res/values/token.xml
+
 # Built application files
 *.apk
 *.ap_

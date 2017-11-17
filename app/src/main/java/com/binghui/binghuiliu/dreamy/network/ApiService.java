@@ -1,11 +1,13 @@
 package com.binghui.binghuiliu.dreamy.network;
 
+import com.binghui.binghuiliu.dreamy.R;
 import com.binghui.binghuiliu.dreamy.bean.Shot;
 
 import java.util.List;
 
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 import rx.Observable;
 
 /**
@@ -13,6 +15,6 @@ import rx.Observable;
  */
 
 public interface ApiService {
-    @GET("teams/{team}/shots?page=2&access_token=8432422eabc3c6a951b5424701181653b6a18096219a88c7dd52c815ef25bf24")
-    Observable<List<Shot>> getShotsList(@Path("team") String team);
+    @GET("teams/{team}/shots?page=2")
+    Observable<List<Shot>> getShotsList(@Path("team") String team, @Query("access_token") String accessToken);
 }
