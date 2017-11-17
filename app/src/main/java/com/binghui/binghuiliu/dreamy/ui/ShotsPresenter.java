@@ -20,7 +20,6 @@ import rx.schedulers.Schedulers;
  */
 
 public class ShotsPresenter {
-    @Inject
     public ShotsPresenter () {
     }
 
