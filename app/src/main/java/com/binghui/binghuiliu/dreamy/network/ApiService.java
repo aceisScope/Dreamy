@@ -1,11 +1,9 @@
 package com.binghui.binghuiliu.dreamy.network;
 
 import com.binghui.binghuiliu.dreamy.bean.Shot;
-import com.binghui.binghuiliu.dreamy.bean.ShotList;
 
 import java.util.List;
 
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import rx.Observable;

@@ -13,7 +13,6 @@ public class DreamyApplication extends Application {
         return (DreamyApplication) context.getApplicationContext();
     }
 
-
     @Override
     public void onCreate() {
         super.onCreate();

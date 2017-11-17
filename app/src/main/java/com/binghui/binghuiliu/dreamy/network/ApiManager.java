@@ -1,7 +1,6 @@
 package com.binghui.binghuiliu.dreamy.network;
 
 import com.binghui.binghuiliu.dreamy.bean.Shot;
-import com.binghui.binghuiliu.dreamy.bean.ShotList;
 
 import java.util.List;
 

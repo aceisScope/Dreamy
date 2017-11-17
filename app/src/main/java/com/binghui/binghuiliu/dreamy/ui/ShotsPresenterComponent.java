@@ -1,7 +1,5 @@
 package com.binghui.binghuiliu.dreamy.ui;
 
-import com.binghui.binghuiliu.dreamy.MainActivity;
-
 import dagger.Component;
 
 /**

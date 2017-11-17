@@ -33,7 +33,7 @@ public class ShotsPresenter {
                 .subscribe(new Action1<List<Shot>>() {
                     @Override
                     public void call(List<Shot> shotList) {
-                        Log.v("Dreamy_Success_2", shotList.toString());
+                        Log.v("Dreamy_Success", shotList.toString());
                     }
                 }, new Action1<Throwable>() {
                     @Override
