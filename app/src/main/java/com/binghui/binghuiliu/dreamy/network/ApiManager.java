@@ -3,8 +3,8 @@ package com.binghui.binghuiliu.dreamy.network;
 import android.app.Application;
 
 import com.binghui.binghuiliu.dreamy.R;
-import com.binghui.binghuiliu.dreamy.app.ApplicationModule;
 import com.binghui.binghuiliu.dreamy.bean.Shot;
+import com.google.gson.GsonBuilder;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public class ApiManager {
 
     private static final Retrofit sRetrofit = new Retrofit
             .Builder()
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().registerTypeAdapterFactory(AutoValueGsonFactory.create()).create()))
             .addCallAdapterFactory(RxJavaCallAdapterFactory.create()) // 使用RxJava作为回调适配器
             .baseUrl(baseURL)
             .build();

@@ -16,6 +16,7 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
+import timber.log.Timber;
 
 /**
  * Created by binghuiliu on 16/11/2017.
@@ -36,12 +37,14 @@ public class ShotsPresenter {
                 .subscribe(new Action1<List<Shot>>() {
                     @Override
                     public void call(List<Shot> shotList) {
-                        Log.v("Dreamy_Success", shotList.toString());
+                        for (Shot shot: shotList) {
+                            Timber.d("Shot: %s", shot.title());
+                        }
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        Log.v("Dreamy_Failure", throwable.getLocalizedMessage());
+                        Timber.d("Dreamy_Failure: %s", throwable.getLocalizedMessage());
                     }
                 });
     }
