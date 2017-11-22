@@ -37,7 +37,9 @@ public class ShotsPresenter {
                 .subscribe(new Action1<List<Shot>>() {
                     @Override
                     public void call(List<Shot> shotList) {
-                        Timber.d("Dreamy_Success: %s", shotList.toString());
+                        for (Shot shot: shotList) {
+                            Timber.d("Shot: %s", shot.title());
+                        }
                     }
                 }, new Action1<Throwable>() {
                     @Override
