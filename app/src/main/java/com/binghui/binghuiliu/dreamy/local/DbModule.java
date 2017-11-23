@@ -1,10 +1,6 @@
 package com.binghui.binghuiliu.dreamy.local;
 
 import android.app.Application;
-import android.arch.persistence.db.SupportSQLiteOpenHelper;
-import android.arch.persistence.db.SupportSQLiteOpenHelper.Configuration;
-import android.arch.persistence.db.SupportSQLiteOpenHelper.Factory;
-import android.arch.persistence.db.framework.FrameworkSQLiteOpenHelperFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.binghui.binghuiliu.dreamy.BuildConfig;

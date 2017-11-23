@@ -17,6 +17,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
 }
 
 dependencies {
@@ -26,9 +29,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-
-    api 'android.arch.persistence:db:1.0.0'
-    implementation 'android.arch.persistence:db-framework:1.0.0'
 
     compile "io.reactivex:rxjava:1.1.5"
     compile "io.reactivex:rxandroid:1.1.0"

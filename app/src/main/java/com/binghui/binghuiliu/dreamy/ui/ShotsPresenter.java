@@ -38,7 +38,7 @@ public class ShotsPresenter {
                     @Override
                     public void call(List<Shot> shotList) {
                         for (Shot shot: shotList) {
-                            Timber.d("Shot: %s", shot.title());
+                            Timber.d("Shot: %s %s, image: %s", shot.id(), shot.title(), shot.images().normal());
                         }
                     }
                 }, new Action1<Throwable>() {
