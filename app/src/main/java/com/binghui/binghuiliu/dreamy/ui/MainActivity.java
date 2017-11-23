@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.binghui.binghuiliu.dreamy.R;
 import com.binghui.binghuiliu.dreamy.app.DreamyApplication;
-import com.squareup.sqlbrite.BriteDatabase;
+import com.squareup.sqlbrite2.BriteDatabase;
 
 import javax.inject.Inject;
 
