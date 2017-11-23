@@ -12,7 +12,8 @@ import timber.log.Timber;
  */
 
 public class DreamyApplication extends Application {
-    
+
+    private ApplicationComponent applicationComponent;
 
     @Override
     public void onCreate() {
@@ -26,7 +27,10 @@ public class DreamyApplication extends Application {
     }
 
     private void setupGraph() {
-
+        applicationComponent = DaggerApplicationComponent.builder().applicationModule(new ApplicationModule(this)).build();
     }
 
+    public static ApplicationComponent getComponent(Context context) {
+        return ((DreamyApplication) context.getApplicationContext()).applicationComponent;
+    }
 }

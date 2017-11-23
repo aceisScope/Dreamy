@@ -2,6 +2,8 @@ package com.binghui.binghuiliu.dreamy.app;
 
 import android.app.Application;
 
+import com.binghui.binghuiliu.dreamy.local.DbModule;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -11,17 +13,17 @@ import dagger.Provides;
  * Created by binghuiliu on 2017/11/17.
  */
 
-@Module
+@Module(includes = {DbModule.class})
 public class ApplicationModule {
-    Application mApplication;
+    private final Application mApplication;
 
     public ApplicationModule(Application application) {
-        mApplication = application;
+        this.mApplication = application;
     }
 
     @Provides
     @Singleton
-    Application providesApplication() {
+    Application provideApplication() {
         return mApplication;
     }
 }
