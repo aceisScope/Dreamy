@@ -11,6 +11,10 @@ public final class Db {
         return cursor.getString(cursor.getColumnIndexOrThrow(columnName));
     }
 
+    public static int getInt(Cursor cursor, String columnName) {
+        return cursor.getInt(cursor.getColumnIndexOrThrow(columnName));
+    }
+
     private Db() {
         throw new AssertionError("No instances.");
     }
