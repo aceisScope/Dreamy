@@ -4,7 +4,9 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.binghui.binghuiliu.dreamy.bean.Images;
 import com.binghui.binghuiliu.dreamy.bean.Shot;
+import com.binghui.binghuiliu.dreamy.bean.User;
 
 /**
  * Created by binghuiliu on 22/11/2017.
@@ -20,6 +22,23 @@ public class DbOpenHelper extends SQLiteOpenHelper {
             + Shot.DESCRIPTION + " TEXT NOT NULL"
             + ")";
 
+    private static final String CREATE_IMAGES = ""
+            + "CREATE TABLE " + Images.TABLE + "("
+            + Images.SHOT_ID + " INTEGER NOT NULL REFERENCES " + Shot.TABLE + "(" + Shot.ID + "),"
+            + Images.HIDPI + " TEXT NOT NULL,"
+            + Images.NORMAL + " TEXT NOT NULL,"
+            + Images.TEASER + " TEXT NOT NULL"
+            + ")";
+
+    private static final String CREATE_USER = ""
+            + "CREATE TABLE " + User.TABLE + "("
+            + User.ID + " TEXT NOT NULL,"
+            + User.SHOT_ID + " INTEGER NOT NULL REFERENCES " + Shot.TABLE + "(" + Shot.ID + "),"
+            + User.NAME + " TEXT NOT NULL,"
+            + User.BIO + " TEXT NOT NULL,"
+            + User.AVATAR_URL + " TEXT NOT NULL"
+            + ")";
+
     public DbOpenHelper(Context context) {
         super(context, "shots.db", null /* factory */, VERSION);
     }
@@ -28,6 +47,8 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(CREATE_SHOT);
+        sqLiteDatabase.execSQL(CREATE_IMAGES);
+        sqLiteDatabase.execSQL(CREATE_USER);
     }
 
     @Override

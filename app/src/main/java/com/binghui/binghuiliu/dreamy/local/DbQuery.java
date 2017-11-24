@@ -5,4 +5,5 @@ package com.binghui.binghuiliu.dreamy.local;
  */
 
 public class DbQuery {
+
 }

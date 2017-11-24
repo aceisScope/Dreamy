@@ -1,15 +1,21 @@
 package com.binghui.binghuiliu.dreamy.bean;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.binghui.binghuiliu.dreamy.local.Db;
 import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
+
+import rx.functions.Func1;
+
+import static io.reactivex.internal.util.NotificationLite.COMPLETE;
 
 /**
  * Created by binghuiliu on 15/11/2017.

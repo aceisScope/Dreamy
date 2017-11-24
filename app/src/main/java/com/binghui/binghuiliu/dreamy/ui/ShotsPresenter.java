@@ -5,7 +5,9 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.binghui.binghuiliu.dreamy.app.ApplicationModule;
+import com.binghui.binghuiliu.dreamy.bean.Images;
 import com.binghui.binghuiliu.dreamy.bean.Shot;
+import com.binghui.binghuiliu.dreamy.bean.User;
 import com.binghui.binghuiliu.dreamy.network.ApiManager;
 import com.squareup.sqlbrite2.BriteDatabase;
 
@@ -44,6 +46,12 @@ public class ShotsPresenter {
                                     .id(shot.id())
                                     .title(shot.title())
                                     .description(shot.description())
+                                    .build());
+                            mBriteDatabase.insert(Images.TABLE, new Images.ContentsBuilder()
+                                    .shotId(shot.id())
+                                    .hidpi(shot.images().hidpi())
+                                    .normal(shot.images().normal())
+                                    .teaser(shot.images().teaser())
                                     .build());
                         }
                     }
