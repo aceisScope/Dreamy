@@ -7,10 +7,9 @@ import android.util.Log;
 import com.binghui.binghuiliu.dreamy.app.ApplicationModule;
 import com.binghui.binghuiliu.dreamy.bean.Shot;
 import com.binghui.binghuiliu.dreamy.network.ApiManager;
+import com.squareup.sqlbrite2.BriteDatabase;
 
 import java.util.List;
-
-import javax.inject.Inject;
 
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -25,9 +24,11 @@ import timber.log.Timber;
 public class ShotsPresenter {
     private Application mApplication;
     private Subscription mSubscription;
+    private BriteDatabase mBriteDatabase;
 
-    public ShotsPresenter (Application application) {
+    public ShotsPresenter (Application application, BriteDatabase briteDatabase) {
         this.mApplication = application;
+        this.mBriteDatabase = briteDatabase;
     }
 
     public void getShotList() {
@@ -39,6 +40,11 @@ public class ShotsPresenter {
                     public void call(List<Shot> shotList) {
                         for (Shot shot: shotList) {
                             Timber.d("Shot: %s %s, image: %s", shot.id(), shot.title(), shot.images().normal());
+                            mBriteDatabase.insert(Shot.TABLE, new Shot.ContentsBuilder()
+                                    .id(shot.id())
+                                    .title(shot.title())
+                                    .description(shot.description())
+                                    .build());
                         }
                     }
                 }, new Action1<Throwable>() {

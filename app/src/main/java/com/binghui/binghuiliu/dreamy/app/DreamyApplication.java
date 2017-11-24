@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.binghui.binghuiliu.dreamy.BuildConfig;
+import com.facebook.stetho.Stetho;
 
 import timber.log.Timber;
 
@@ -17,16 +18,12 @@ public class DreamyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        setupGraph();
 
         if (BuildConfig.DEBUG) {
             Timber.uprootAll();
             Timber.plant(new Timber.DebugTree());
+
+            Stetho.initializeWithDefaults(this);
         }
     }
-
-    private void setupGraph() {
-
-    }
-
 }

@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.binghui.binghuiliu.dreamy.R;
-//import com.binghui.binghuiliu.dreamy.ui.DaggerShotsPresenterComponent;
 import com.binghui.binghuiliu.dreamy.app.ApplicationModule;
 import com.binghui.binghuiliu.dreamy.ui.ShotsPresenter;
 
