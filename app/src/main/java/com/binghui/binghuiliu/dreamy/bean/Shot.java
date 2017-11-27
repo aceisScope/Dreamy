@@ -13,6 +13,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import rx.functions.Func1;
 
 import static io.reactivex.internal.util.NotificationLite.COMPLETE;
@@ -27,6 +29,7 @@ public abstract class Shot implements Parcelable{
     public static final String TABLE = "shot_table";
 
     public static final String ID = "_id";
+    public static final String USER_ID = "user_id";
     public static final String TITLE = "title";
     public static final String DESCRIPTION = "description";
 
@@ -46,6 +49,11 @@ public abstract class Shot implements Parcelable{
 
         public ContentsBuilder id(String id) {
             values.put(ID, Integer.parseInt(id));
+            return this;
+        }
+
+        public ContentsBuilder userId(String userId) {
+            values.put(USER_ID, Integer.parseInt(userId));
             return this;
         }
 

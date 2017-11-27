@@ -46,6 +46,7 @@ public class ShotsPresenter {
                             Timber.d("Shot: %s %s, image: %s", shot.id(), shot.title(), shot.images().normal());
                             mBriteDatabase.insert(Shot.TABLE, new Shot.ContentsBuilder()
                                     .id(shot.id())
+                                    .userId(shot.user().id())
                                     .title(shot.title())
                                     .description(shot.description())
                                     .build(), CONFLICT_IGNORE);

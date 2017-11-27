@@ -15,9 +15,18 @@ import com.binghui.binghuiliu.dreamy.bean.User;
 public class DbOpenHelper extends SQLiteOpenHelper {
     private static final int VERSION = 1;
 
+    private static final String CREATE_USER = ""
+            + "CREATE TABLE " + User.TABLE + "("
+            + User.ID + " INTEGER NOT NULL PRIMARY KEY,"
+            + User.NAME + " TEXT NOT NULL,"
+            + User.BIO + " TEXT NOT NULL,"
+            + User.AVATAR_URL + " TEXT NOT NULL"
+            + ")";
+
     private static final String CREATE_SHOT = ""
             + "CREATE TABLE " + Shot.TABLE + "("
             + Shot.ID + " INTEGER NOT NULL PRIMARY KEY,"
+            + Shot.USER_ID + " INTEGER NOT NULL REFERENCES " + User.TABLE + "(" + User.ID + "),"
             + Shot.TITLE + " TEXT NOT NULL,"
             + Shot.DESCRIPTION + " TEXT NOT NULL"
             + ")";
@@ -30,14 +39,6 @@ public class DbOpenHelper extends SQLiteOpenHelper {
             + Images.TEASER + " TEXT NOT NULL"
             + ")";
 
-    private static final String CREATE_USER = ""
-            + "CREATE TABLE " + User.TABLE + "("
-            + User.ID + " INTEGER NOT NULL PRIMARY KEY,"
-            + User.NAME + " TEXT NOT NULL,"
-            + User.BIO + " TEXT NOT NULL,"
-            + User.AVATAR_URL + " TEXT NOT NULL"
-            + ")";
-
     public DbOpenHelper(Context context) {
         super(context, "shots.db", null /* factory */, VERSION);
     }
@@ -45,9 +46,9 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        sqLiteDatabase.execSQL(CREATE_USER);
         sqLiteDatabase.execSQL(CREATE_SHOT);
         sqLiteDatabase.execSQL(CREATE_IMAGES);
-        sqLiteDatabase.execSQL(CREATE_USER);
     }
 
     @Override
