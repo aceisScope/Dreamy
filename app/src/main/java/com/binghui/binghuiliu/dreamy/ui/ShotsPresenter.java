@@ -48,13 +48,13 @@ public class ShotsPresenter {
                                     .id(shot.id())
                                     .title(shot.title())
                                     .description(shot.description())
-                                    .build());
+                                    .build(), CONFLICT_IGNORE);
                             mBriteDatabase.insert(Images.TABLE, new Images.ContentsBuilder()
                                     .shotId(shot.id())
                                     .hidpi(shot.images().hidpi())
                                     .normal(shot.images().normal())
                                     .teaser(shot.images().teaser())
-                                    .build());
+                                    .build(), CONFLICT_IGNORE);
                             mBriteDatabase.insert(User.TABLE, new User.ContentsBuilder()
                                     .id(shot.user().id())
                                     .name(shot.user().name())
