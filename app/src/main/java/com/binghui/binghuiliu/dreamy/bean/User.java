@@ -15,11 +15,8 @@ import com.google.gson.TypeAdapter;
 @AutoValue
 public abstract class User implements Parcelable{
 
-    // TODO: User 和 Shot 是多对多的数据关系， 此处需要修改
-
     public static final String TABLE = "user_table";
 
-    public static final String SHOT_ID = "shot_id";
     public static final String ID = "_id";
     public static final String NAME = "name";
     public static final String BIO = "bio";
@@ -36,11 +33,6 @@ public abstract class User implements Parcelable{
 
     public static final class ContentsBuilder {
         private final ContentValues values = new ContentValues();
-
-        public User.ContentsBuilder shotId(String shotId) {
-            values.put(SHOT_ID, Integer.parseInt(shotId));
-            return this;
-        }
 
         public User.ContentsBuilder id(String id) {
             values.put(ID, Integer.parseInt(id));

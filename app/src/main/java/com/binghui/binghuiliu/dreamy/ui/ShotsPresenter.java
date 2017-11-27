@@ -19,6 +19,8 @@ import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
+import static android.database.sqlite.SQLiteDatabase.CONFLICT_IGNORE;
+
 /**
  * Created by binghuiliu on 16/11/2017.
  */
@@ -53,6 +55,12 @@ public class ShotsPresenter {
                                     .normal(shot.images().normal())
                                     .teaser(shot.images().teaser())
                                     .build());
+                            mBriteDatabase.insert(User.TABLE, new User.ContentsBuilder()
+                                    .id(shot.user().id())
+                                    .name(shot.user().name())
+                                    .bio(shot.user().bio())
+                                    .avatarURL(shot.user().avatar_url())
+                                    .build(), CONFLICT_IGNORE);
                         }
                     }
                 }, new Action1<Throwable>() {

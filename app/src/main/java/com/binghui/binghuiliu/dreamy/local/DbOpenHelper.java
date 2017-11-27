@@ -32,8 +32,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 
     private static final String CREATE_USER = ""
             + "CREATE TABLE " + User.TABLE + "("
-            + User.ID + " TEXT NOT NULL,"
-            + User.SHOT_ID + " INTEGER NOT NULL REFERENCES " + Shot.TABLE + "(" + Shot.ID + "),"
+            + User.ID + " INTEGER NOT NULL PRIMARY KEY,"
             + User.NAME + " TEXT NOT NULL,"
             + User.BIO + " TEXT NOT NULL,"
             + User.AVATAR_URL + " TEXT NOT NULL"
