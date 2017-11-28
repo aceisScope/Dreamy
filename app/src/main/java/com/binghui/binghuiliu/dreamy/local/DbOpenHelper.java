@@ -12,6 +12,7 @@ import com.binghui.binghuiliu.dreamy.bean.User;
  * Created by binghuiliu on 22/11/2017.
  */
 
+// TODO: Create a TAG table and a relationship table for tags and shots
 public class DbOpenHelper extends SQLiteOpenHelper {
     private static final int VERSION = 1;
 
@@ -33,11 +34,12 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 
     private static final String CREATE_IMAGES = ""
             + "CREATE TABLE " + Images.TABLE + "("
-            + Images.SHOT_ID + " INTEGER NOT NULL REFERENCES " + Shot.TABLE + "(" + Shot.ID + "),"
+            + Images.SHOT_ID + " INTEGER NOT NULL PRIMARY KEY,"
             + Images.HIDPI + " TEXT NOT NULL,"
             + Images.NORMAL + " TEXT NOT NULL,"
             + Images.TEASER + " TEXT NOT NULL"
             + ")";
+
 
     public DbOpenHelper(Context context) {
         super(context, "shots.db", null /* factory */, VERSION);
