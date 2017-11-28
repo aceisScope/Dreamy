@@ -5,6 +5,8 @@ import com.binghui.binghuiliu.dreamy.bean.Shot;
 import com.binghui.binghuiliu.dreamy.bean.User;
 import com.squareup.sqlbrite2.BriteDatabase;
 
+import rx.Observable;
+
 import static android.database.sqlite.SQLiteDatabase.CONFLICT_IGNORE;
 
 /**
@@ -12,6 +14,14 @@ import static android.database.sqlite.SQLiteDatabase.CONFLICT_IGNORE;
  */
 
 public class DbQueryHelper {
+
+    private static final String SELECT_SHOT_BY_ID =
+            "SELECT * FROM " + Shot.TABLE + " WHERE " + Shot.ID + " = ? ";
+    private static final String SELECT_USER_BY_ID =
+            "SELECT * FROM " + User.TABLE + " WHERE " + User.ID + " = ? ";
+    private static final String SELECT_IMAGE_BY_SHOT_ID =
+            "SELECT * FROM " + Images.TABLE + " WHERE " + Images.SHOT_ID + " = ? ";
+
     public static long insertShot(BriteDatabase briteDatabase, Shot shot) {
         briteDatabase.insert(User.TABLE, new User.ContentsBuilder()
                 .id(shot.user().id())
