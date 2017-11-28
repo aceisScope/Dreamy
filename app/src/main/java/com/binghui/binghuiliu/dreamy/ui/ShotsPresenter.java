@@ -13,6 +13,8 @@ import com.squareup.sqlbrite2.BriteDatabase;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -25,7 +27,9 @@ import static android.database.sqlite.SQLiteDatabase.CONFLICT_IGNORE;
  * Created by binghuiliu on 16/11/2017.
  */
 
-public class ShotsPresenter {
+public class ShotsPresenter implements ShotsContract.Presenter {
+    private ShotsContract.View view;
+
     private Application mApplication;
     private Subscription mSubscription;
     private BriteDatabase mBriteDatabase;
@@ -35,6 +39,7 @@ public class ShotsPresenter {
         this.mBriteDatabase = briteDatabase;
     }
 
+    @Override
     public void getShotList() {
         mSubscription = ApiManager.getShotsList(mApplication)
                 .subscribeOn(Schedulers.io())
@@ -72,13 +77,16 @@ public class ShotsPresenter {
                 });
     }
 
-    public void attachView() {
-
+    @Override
+    public void attachView(@Nonnull ShotsContract.View view) {
+        this.view = view;
     }
 
+    @Override
     public void detachView() {
         if (mSubscription != null && !mSubscription.isUnsubscribed()) {
             mSubscription.unsubscribe();
         }
+        view = null;
     }
 }
