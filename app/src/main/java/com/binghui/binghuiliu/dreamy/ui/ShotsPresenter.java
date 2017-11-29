@@ -18,12 +18,10 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 import static android.database.sqlite.SQLiteDatabase.CONFLICT_IGNORE;
@@ -36,7 +34,7 @@ public class ShotsPresenter implements ShotsContract.Presenter {
     private ShotsContract.View view;
 
     private Application mApplication;
-    private Subscription mSubscription;
+    private Disposable mNetworkDisposable;
     private BriteDatabase mBriteDatabase;
 
     public ShotsPresenter (Application application, BriteDatabase briteDatabase) {
@@ -46,25 +44,20 @@ public class ShotsPresenter implements ShotsContract.Presenter {
 
     @Override
     public void getShotList() {
-        mSubscription = ApiManager.getShotsList(mApplication)
+        mNetworkDisposable = ApiManager.getShotsList(mApplication)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<List<Shot>>() {
+                .subscribe(new Consumer<List<Shot>>() {
                     @Override
-                    public void call(List<Shot> shotList) {
+                    public void accept(List<Shot> shotList) throws Exception {
                         for (Shot shot: shotList) {
                             Timber.d("Shot: %s %s, image: %s", shot.id(), shot.title(), shot.images().normal());
                             DbQueryHelper.insertShot(mBriteDatabase, shot);
                         }
                     }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-                        Timber.d("Dreamy_Failure: %s", throwable.getLocalizedMessage());
-                    }
                 });
 
-        Disposable disposable = DbQueryHelper.selectImagesByShotId(mBriteDatabase, "3883154")
+        Disposable disposable = DbQueryHelper.selectImagesByShotId(mBriteDatabase, "3917245")
                 .subscribe(new Consumer<Images>() {
                     @Override
                     public void accept(Images images) throws Exception {
@@ -80,8 +73,8 @@ public class ShotsPresenter implements ShotsContract.Presenter {
 
     @Override
     public void detachView() {
-        if (mSubscription != null && !mSubscription.isUnsubscribed()) {
-            mSubscription.unsubscribe();
+        if (mNetworkDisposable != null && !mNetworkDisposable.isDisposed()) {
+            mNetworkDisposable.dispose();
         }
         view = null;
     }

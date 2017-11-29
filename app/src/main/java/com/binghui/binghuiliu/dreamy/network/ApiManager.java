@@ -8,10 +8,10 @@ import com.google.gson.GsonBuilder;
 
 import java.util.List;
 
+import io.reactivex.Observable;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import rx.Observable;
 
 /**
  * Created by binghuiliu on 16/11/2017.
@@ -25,7 +25,7 @@ public class ApiManager {
     private static final Retrofit sRetrofit = new Retrofit
             .Builder()
             .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().registerTypeAdapterFactory(AutoValueGsonFactory.create()).create()))
-            .addCallAdapterFactory(RxJavaCallAdapterFactory.create()) // 使用RxJava作为回调适配器
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create()) // 使用RxJava2作为回调适配器
             .baseUrl(baseURL)
             .build();
 

@@ -68,13 +68,14 @@ public abstract class Images implements Parcelable {
         public Images apply(Query query) {
             Cursor cursor = query.run();
             try {
-                if (!cursor.moveToNext()) {
-                    throw new AssertionError("No rows");
+                if (cursor.moveToNext()) {
+                    String hidpi = Db.getString(cursor, Images.HIDPI);
+                    String normal = Db.getString(cursor, Images.NORMAL);
+                    String teaser = Db.getString(cursor, Images.TEASER);
+                    return new AutoValue_Images(hidpi, normal, teaser);
+                } else {
+                    return null;
                 }
-                String hidpi = Db.getString(cursor, Images.HIDPI);
-                String normal = Db.getString(cursor, Images.NORMAL);
-                String teaser = Db.getString(cursor, Images.TEASER);
-                return new AutoValue_Images(hidpi, normal, teaser);
             } finally {
                 cursor.close();
             }
