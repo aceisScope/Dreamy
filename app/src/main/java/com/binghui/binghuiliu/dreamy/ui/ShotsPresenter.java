@@ -58,6 +58,8 @@ public class ShotsPresenter implements ShotsContract.Presenter {
                 });
 
         Disposable disposable = DbQueryHelper.selectImagesByShotId(mBriteDatabase, "3917245")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Images>() {
                     @Override
                     public void accept(Images images) throws Exception {
