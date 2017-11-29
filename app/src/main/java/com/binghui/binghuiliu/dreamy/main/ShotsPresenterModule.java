@@ -1,4 +1,4 @@
-package com.binghui.binghuiliu.dreamy.ui;
+package com.binghui.binghuiliu.dreamy.main;
 
 import android.app.Application;
 

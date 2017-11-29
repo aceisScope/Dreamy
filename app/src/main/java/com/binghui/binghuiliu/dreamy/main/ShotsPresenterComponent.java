@@ -1,6 +1,4 @@
-package com.binghui.binghuiliu.dreamy.ui;
-
-import com.binghui.binghuiliu.dreamy.app.ApplicationModule;
+package com.binghui.binghuiliu.dreamy.main;
 
 import javax.inject.Singleton;
 

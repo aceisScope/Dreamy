@@ -1,4 +1,4 @@
-package com.binghui.binghuiliu.dreamy.ui;
+package com.binghui.binghuiliu.dreamy.main;
 
 import com.binghui.binghuiliu.dreamy.BasePresenter;
 import com.binghui.binghuiliu.dreamy.BaseView;

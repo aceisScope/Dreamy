@@ -1,15 +1,9 @@
-package com.binghui.binghuiliu.dreamy.ui;
+package com.binghui.binghuiliu.dreamy.main;
 
 import android.app.Application;
-import android.database.Observable;
-import android.support.annotation.NonNull;
-import android.util.Log;
 
-import com.binghui.binghuiliu.dreamy.app.ApplicationModule;
 import com.binghui.binghuiliu.dreamy.bean.Images;
 import com.binghui.binghuiliu.dreamy.bean.Shot;
-import com.binghui.binghuiliu.dreamy.bean.User;
-import com.binghui.binghuiliu.dreamy.local.Db;
 import com.binghui.binghuiliu.dreamy.local.DbQueryHelper;
 import com.binghui.binghuiliu.dreamy.network.ApiManager;
 import com.squareup.sqlbrite2.BriteDatabase;
@@ -23,8 +17,6 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
-
-import static android.database.sqlite.SQLiteDatabase.CONFLICT_IGNORE;
 
 /**
  * Created by binghuiliu on 16/11/2017.
