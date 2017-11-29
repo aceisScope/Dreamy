@@ -18,6 +18,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setupComponent();
+
+        MainFragment mainFragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.main_fragment_container);
+        shotsPresenter.attachView(mainFragment);
         shotsPresenter.getShotList();
     }
 

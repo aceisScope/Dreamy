@@ -42,8 +42,8 @@ public class ShotsPresenter implements ShotsContract.Presenter {
                 .subscribe(new Consumer<List<Shot>>() {
                     @Override
                     public void accept(List<Shot> shotList) throws Exception {
+                        view.load(shotList);
                         for (Shot shot: shotList) {
-                            Timber.d("Shot: %s %s, image: %s", shot.id(), shot.title(), shot.images().normal());
                             DbQueryHelper.insertShot(mBriteDatabase, shot);
                         }
                     }
