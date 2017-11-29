@@ -45,7 +45,6 @@ public class DbOpenHelper extends SQLiteOpenHelper {
         super(context, "shots.db", null /* factory */, VERSION);
     }
 
-
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(CREATE_USER);

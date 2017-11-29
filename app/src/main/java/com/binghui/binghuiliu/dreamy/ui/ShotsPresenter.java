@@ -1,6 +1,7 @@
 package com.binghui.binghuiliu.dreamy.ui;
 
 import android.app.Application;
+import android.database.Observable;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -17,6 +18,8 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -58,6 +61,14 @@ public class ShotsPresenter implements ShotsContract.Presenter {
                     @Override
                     public void call(Throwable throwable) {
                         Timber.d("Dreamy_Failure: %s", throwable.getLocalizedMessage());
+                    }
+                });
+
+        Disposable disposable = DbQueryHelper.selectImagesByShotId(mBriteDatabase, "3883154")
+                .subscribe(new Consumer<Images>() {
+                    @Override
+                    public void accept(Images images) throws Exception {
+                        Timber.d("Images Query: %s", images.hidpi());
                     }
                 });
     }

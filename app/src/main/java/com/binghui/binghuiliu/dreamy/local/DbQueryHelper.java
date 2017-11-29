@@ -5,7 +5,7 @@ import com.binghui.binghuiliu.dreamy.bean.Shot;
 import com.binghui.binghuiliu.dreamy.bean.User;
 import com.squareup.sqlbrite2.BriteDatabase;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 import static android.database.sqlite.SQLiteDatabase.CONFLICT_IGNORE;
 
@@ -43,5 +43,9 @@ public class DbQueryHelper {
                 .build(), CONFLICT_IGNORE);
 
         return rowId;
+    }
+
+    public static Observable<Images> selectImagesByShotId(BriteDatabase briteDatabase, String shotId) {
+        return briteDatabase.createQuery(Images.TABLE, SELECT_IMAGE_BY_SHOT_ID, shotId).map(Images.MAPPER);
     }
 }

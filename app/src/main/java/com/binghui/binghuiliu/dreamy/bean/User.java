@@ -10,7 +10,8 @@ import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 
-import rx.functions.Func1;
+import io.reactivex.functions.Function;
+
 
 /**
  * Created by binghuiliu on 15/11/2017.
@@ -63,9 +64,9 @@ public abstract class User implements Parcelable{
         }
     }
 
-    static Func1<Cursor, User> MAPPER = new Func1<Cursor, User>() {
+    static Function<Cursor, User> MAPPER = new Function<Cursor, User>() {
         @Override
-        public User call(Cursor cursor) {
+        public User apply(Cursor cursor) {
             String id = Integer.toString(Db.getInt(cursor, User.ID));
             String name = Db.getString(cursor, User.NAME);
             String bio = Db.getString(cursor, User.BIO);

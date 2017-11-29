@@ -8,8 +8,10 @@ import com.binghui.binghuiliu.dreamy.local.Db;
 import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
+import com.squareup.sqlbrite2.SqlBrite.Query;
 
-import rx.functions.Func1;
+import io.reactivex.functions.Function;
+
 
 /**
  * Created by binghuiliu on 15/11/2017.
@@ -61,13 +63,21 @@ public abstract class Images implements Parcelable {
         }
     }
 
-    static Func1<Cursor, Images> MAPPER = new Func1<Cursor, Images>() {
+    public static Function<Query, Images> MAPPER = new Function<Query, Images>() {
         @Override
-        public Images call(Cursor cursor) {
-            String hidpi = Db.getString(cursor, Images.HIDPI);
-            String normal = Db.getString(cursor, Images.NORMAL);
-            String teaser = Db.getString(cursor, Images.TEASER);
-            return new AutoValue_Images(hidpi, normal, teaser);
+        public Images apply(Query query) {
+            Cursor cursor = query.run();
+            try {
+                if (!cursor.moveToNext()) {
+                    throw new AssertionError("No rows");
+                }
+                String hidpi = Db.getString(cursor, Images.HIDPI);
+                String normal = Db.getString(cursor, Images.NORMAL);
+                String teaser = Db.getString(cursor, Images.TEASER);
+                return new AutoValue_Images(hidpi, normal, teaser);
+            } finally {
+                cursor.close();
+            }
         }
     };
 }
