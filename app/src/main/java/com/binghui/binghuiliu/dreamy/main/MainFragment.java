@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 
 import com.binghui.binghuiliu.dreamy.R;
 import com.binghui.binghuiliu.dreamy.bean.Shot;
-import com.binghui.binghuiliu.dreamy.local.DbQueryHelper;
 
 import java.util.List;
 
