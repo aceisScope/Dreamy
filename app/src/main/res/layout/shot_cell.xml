@@ -21,8 +21,8 @@
 
         <ImageView
             android:id="@+id/view_icon"
-            android:layout_width="@dimen/material_card_actions_icon_action_size"
-            android:layout_height="@dimen/material_card_actions_icon_action_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/shot_image"
             android:layout_marginEnd="62dp"
             android:layout_marginRight="62dp"
@@ -33,8 +33,8 @@
 
         <ImageView
             android:id="@+id/like_icon"
-            android:layout_width="@dimen/material_card_actions_icon_action_size"
-            android:layout_height="@dimen/material_card_actions_icon_action_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/shot_image"
             android:layout_alignEnd="@+id/shot_image"
             android:layout_alignRight="@+id/shot_image"
