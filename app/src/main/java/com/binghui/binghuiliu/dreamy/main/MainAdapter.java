@@ -1,5 +1,6 @@
 package com.binghui.binghuiliu.dreamy.main;
 
+import android.content.Context;
 import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import com.binghui.binghuiliu.dreamy.R;
 import com.binghui.binghuiliu.dreamy.bean.Shot;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 
 import java.util.Collections;
 import java.util.List;
@@ -25,6 +27,11 @@ import timber.log.Timber;
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder> {
 
     private List<Shot> shotList = Collections.emptyList();
+    private final RequestManager glide;
+
+    MainAdapter(RequestManager glide) {
+        this.glide = glide;
+    }
 
     @Override
     public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -34,6 +41,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
 
     @Override
     public void onBindViewHolder(MainViewHolder holder, int position) {
+        glide.load("http://goo.gl/gEgYUd").into(holder.shotImage);
     }
 
     @Override

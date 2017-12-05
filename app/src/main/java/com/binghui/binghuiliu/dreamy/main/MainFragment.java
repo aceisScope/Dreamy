@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.binghui.binghuiliu.dreamy.R;
 import com.binghui.binghuiliu.dreamy.bean.Shot;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class MainFragment extends Fragment implements ShotsContract.View {
     }
 
     private void initRecyclerView() {
-        mainAdapter = new MainAdapter();
+        mainAdapter = new MainAdapter(Glide.with(this));
         shotRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), columnCount));
         shotRecyclerView.setAdapter(mainAdapter);
     }
