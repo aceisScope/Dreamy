@@ -39,6 +39,11 @@ public abstract class Shot implements Parcelable{
     public abstract Images images();
     public abstract List<String> tags();
     public abstract User user();
+    @SerializedName("views_count")
+    public abstract String viewsCount();
+    @SerializedName("likes_count")
+    public abstract String likesCount();
+
 
     public static TypeAdapter<Shot> typeAdapter(Gson gson) {
         return new AutoValue_Shot.GsonTypeAdapter(gson);

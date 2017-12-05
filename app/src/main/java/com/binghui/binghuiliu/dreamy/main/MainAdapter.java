@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.binghui.binghuiliu.dreamy.R;
 import com.binghui.binghuiliu.dreamy.bean.Shot;
@@ -41,12 +42,22 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
 
     @Override
     public void onBindViewHolder(MainViewHolder holder, int position) {
-        glide.load("http://goo.gl/gEgYUd").into(holder.shotImage);
+        // image
+        String normalImageUrl = shotList.get(position).images().normal();
+        if (normalImageUrl != null) {
+            glide.load(normalImageUrl).into(holder.shotImageView);
+        }
+
+        // view
+        holder.viewCountTextView.setText(shotList.get(position).viewsCount());
+
+        // like
+        holder.likeCountTextView.setText(shotList.get(position).likesCount());
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return shotList.size();
     }
 
     public void setShotList(List<Shot> shotList) {
@@ -61,7 +72,13 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
     class MainViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.shot_image)
-        ImageView shotImage;
+        ImageView shotImageView;
+
+        @BindView(R.id.like_count_text)
+        TextView likeCountTextView;
+
+        @BindView(R.id.view_count_text)
+        TextView viewCountTextView;
 
         public MainViewHolder(View itemView) {
             super(itemView);
