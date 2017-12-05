@@ -24,7 +24,7 @@ import timber.log.Timber;
  * Created by binghuiliu on 29/11/2017.
  */
 
-public class MainFragment extends Fragment implements ShotsContract.View {
+public class MainFragment extends Fragment implements ShotsContract.View, MainAdapter.OnItemClickListener {
 
     private MainAdapter mainAdapter;
 
@@ -46,7 +46,7 @@ public class MainFragment extends Fragment implements ShotsContract.View {
     }
 
     private void initRecyclerView() {
-        mainAdapter = new MainAdapter(Glide.with(this));
+        mainAdapter = new MainAdapter(Glide.with(this), this);
         shotRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), columnCount));
         shotRecyclerView.setAdapter(mainAdapter);
     }
@@ -54,5 +54,10 @@ public class MainFragment extends Fragment implements ShotsContract.View {
     @Override
     public void load(List<Shot> shotList) {
         mainAdapter.setShotList(shotList);
+    }
+
+    @Override
+    public void onItemClick(int position) {
+
     }
 }

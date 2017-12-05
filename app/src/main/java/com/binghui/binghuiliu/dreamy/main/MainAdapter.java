@@ -19,6 +19,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.OnItemClick;
 import timber.log.Timber;
 
 /**
@@ -28,10 +30,13 @@ import timber.log.Timber;
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder> {
 
     private List<Shot> shotList = Collections.emptyList();
-    private final RequestManager glide;
 
-    MainAdapter(RequestManager glide) {
+    private final RequestManager glide;
+    private OnItemClickListener mClickListener;
+
+    MainAdapter(RequestManager glide, OnItemClickListener clickListener) {
         this.glide = glide;
+        this.mClickListener = clickListener;
     }
 
     @Override
@@ -45,6 +50,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
         // image
         String normalImageUrl = shotList.get(position).images().normal();
         if (normalImageUrl != null) {
+            // glide can load gif automatically
             glide.load(normalImageUrl).into(holder.shotImageView);
         }
 
@@ -79,6 +85,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
 
         @BindView(R.id.view_count_text)
         TextView viewCountTextView;
+
+        @OnClick
+        void onClick() {
+            mClickListener.onItemClick(getAdapterPosition());
+        }
 
         public MainViewHolder(View itemView) {
             super(itemView);
