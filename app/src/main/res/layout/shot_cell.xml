@@ -19,7 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="@dimen/material_card_actions_row_padding"
-            android:layout_marginVertical="@dimen/material_card_actions_row_padding"
+            android:layout_marginTop="@dimen/material_card_actions_row_padding"
+            android:layout_marginBottom="@dimen/action_icon_size"
             android:contentDescription="@string/image_shot"
             android:scaleType="centerCrop"
             android:src="@drawable/shot_placeholder" />
@@ -28,51 +29,51 @@
             android:id="@+id/view_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/shot_image"
+            android:layout_alignParentBottom="true"
             android:layout_marginEnd="62dp"
             android:layout_marginRight="62dp"
             android:layout_toLeftOf="@+id/like_icon"
             android:layout_toStartOf="@+id/like_icon"
-            android:tint="@color/colorIcons"
+            android:tint="@color/colorSecondaryText"
             app:srcCompat="@drawable/ic_visibility_black_24dp" />
 
         <ImageView
             android:id="@+id/like_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/shot_image"
             android:layout_alignEnd="@+id/shot_image"
+            android:layout_alignBottom="@+id/view_icon"
             android:layout_alignRight="@+id/shot_image"
             android:layout_marginEnd="64dp"
             android:layout_marginRight="64dp"
-            android:tint="@color/colorIcons"
+            android:tint="@color/colorSecondaryText"
             app:srcCompat="@drawable/ic_favorite_black_24dp" />
 
         <TextView
             android:id="@+id/view_count_text"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
-            android:layout_alignBottom="@+id/shot_image"
             android:layout_alignLeft="@+id/view_icon"
+            android:layout_alignBottom="@+id/view_icon"
             android:layout_alignStart="@+id/view_icon"
             android:layout_marginLeft="24dp"
             android:layout_marginStart="24dp"
             android:gravity="center"
             android:text="1,452"
-            android:textColor="@color/colorIcons" />
+            android:textColor="@color/colorSecondaryText" />
 
         <TextView
             android:id="@+id/like_count_text"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
-            android:layout_alignBottom="@+id/shot_image"
+            android:layout_alignLeft="@+id/like_icon"
+            android:layout_alignBottom="@+id/view_icon"
+            android:layout_alignStart="@+id/like_icon"
             android:layout_marginLeft="24dp"
             android:layout_marginStart="24dp"
-            android:layout_alignLeft="@+id/like_icon"
-            android:layout_alignStart="@+id/like_icon"
             android:gravity="center"
             android:text="56"
-            android:textColor="@color/colorIcons" />
+            android:textColor="@color/colorSecondaryText" />
 
     </RelativeLayout>
 
