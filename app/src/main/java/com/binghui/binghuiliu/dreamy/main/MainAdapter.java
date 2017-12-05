@@ -6,14 +6,21 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.binghui.binghuiliu.dreamy.R;
+import com.binghui.binghuiliu.dreamy.bean.Shot;
+
+import java.util.Collections;
+import java.util.List;
 
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 /**
  * Created by binghuiliu on 04/12/2017.
  */
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder> {
+
+    private List<Shot> shotList = Collections.emptyList();
 
     @Override
     public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -29,6 +36,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
     @Override
     public int getItemCount() {
         return 10;
+    }
+
+    public void setShotList(List<Shot> shotList) {
+        this.shotList = shotList;
+        notifyDataSetChanged();
     }
 
     public interface OnItemClickListener {

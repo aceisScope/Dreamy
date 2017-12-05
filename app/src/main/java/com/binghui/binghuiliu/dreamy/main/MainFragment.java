@@ -52,8 +52,6 @@ public class MainFragment extends Fragment implements ShotsContract.View {
 
     @Override
     public void load(List<Shot> shotList) {
-        for (Shot shot: shotList) {
-
-        }
+        mainAdapter.setShotList(shotList);
     }
 }
