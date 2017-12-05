@@ -31,6 +31,10 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
         return 10;
     }
 
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
     class MainViewHolder extends RecyclerView.ViewHolder {
 
         public MainViewHolder(View itemView) {
