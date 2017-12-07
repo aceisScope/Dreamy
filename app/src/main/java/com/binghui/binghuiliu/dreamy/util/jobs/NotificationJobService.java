@@ -29,6 +29,7 @@ public class NotificationJobService extends JobService {
                 NotificationCompat.Builder mBuilder =
                         new NotificationCompat.Builder(NotificationJobService.this, Constants.NOTIFICATION_CHANNEL_ID)
                                 .setAutoCancel(true)
+                                .setSmallIcon(R.mipmap.ic_launcher)
                                 .setContentTitle("Dreamy")
                                 .setContentText("又有新的内容上线了，快来我们app看看吧!");
                 // When the app launches by a notification, starts the intended activity
