@@ -1,5 +1,6 @@
 package com.binghui.binghuiliu.dreamy.util.jobs;
 
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
@@ -7,12 +8,15 @@ import android.app.job.JobParameters;
 import android.app.job.JobService;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 
 import com.binghui.binghuiliu.dreamy.R;
 import com.binghui.binghuiliu.dreamy.main.MainActivity;
 import com.binghui.binghuiliu.dreamy.util.Constants;
+
+import timber.log.Timber;
 
 /**
  * Created by binghuiliu on 07/12/2017.
@@ -21,17 +25,23 @@ import com.binghui.binghuiliu.dreamy.util.Constants;
 public class NotificationJobService extends JobService {
 
     @Override
+    public void onCreate() {
+        super.onCreate();
+        Timber.d("NotificationJobService created");
+    }
+
+    @Override
     public boolean onStartJob(JobParameters jobParameters) {
         long lastLaunchTime = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getLong(Constants.LAST_LAUNCH, -1);
         if(lastLaunchTime > 0) {
             long intervalSinceLastLaunch = System.currentTimeMillis() - lastLaunchTime;
-            if(intervalSinceLastLaunch > Constants.LAUNCH_PERIOD) {
+            if(intervalSinceLastLaunch > Constants.NOTIFICATION_PERIOD) {
                 NotificationCompat.Builder mBuilder =
-                        new NotificationCompat.Builder(NotificationJobService.this, Constants.NOTIFICATION_CHANNEL_ID)
+                        new NotificationCompat.Builder(this)
                                 .setAutoCancel(true)
                                 .setSmallIcon(R.mipmap.ic_launcher)
                                 .setContentTitle("Dreamy")
-                                .setContentText("又有新的内容上线了，快来我们app看看吧!");
+                                .setContentText("Miss you!");
                 // When the app launches by a notification, starts the intended activity
                 Intent resultIntent = new Intent(NotificationJobService.this, MainActivity.class);
                 // TaskStackBuilder here only acts as an example. The purpose is to make the app go back from
@@ -50,6 +60,13 @@ public class NotificationJobService extends JobService {
                 mBuilder.setContentIntent(resultPendingIntent);
                 NotificationManager mNotificationManager =
                         (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                // channel is required for Oreo
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    NotificationChannel channel = new NotificationChannel(Constants.NOTIFICATION_CHANNEL_ID,
+                            Constants.NOTIFICATION_CHANNEL_NAME,
+                            NotificationManager.IMPORTANCE_DEFAULT);
+                    mNotificationManager.createNotificationChannel(channel);
+                }
                 mNotificationManager.notify(1, mBuilder.build());
             }
         }
