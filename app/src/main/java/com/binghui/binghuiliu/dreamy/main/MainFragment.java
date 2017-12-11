@@ -8,9 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.binghui.binghuiliu.dreamy.R;
 import com.binghui.binghuiliu.dreamy.bean.Shot;
+import com.binghui.binghuiliu.dreamy.util.notification.NotificationHelper;
 import com.bumptech.glide.Glide;
 
 import java.util.List;

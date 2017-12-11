@@ -32,42 +32,12 @@ public class NotificationJobService extends JobService {
 
     @Override
     public boolean onStartJob(JobParameters jobParameters) {
+        Timber.d("NotificationJobService started");
         long lastLaunchTime = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getLong(Constants.LAST_LAUNCH, -1);
         if(lastLaunchTime > 0) {
             long intervalSinceLastLaunch = System.currentTimeMillis() - lastLaunchTime;
             if(intervalSinceLastLaunch > Constants.NOTIFICATION_PERIOD) {
-                NotificationCompat.Builder mBuilder =
-                        new NotificationCompat.Builder(this)
-                                .setAutoCancel(true)
-                                .setSmallIcon(R.mipmap.ic_launcher)
-                                .setContentTitle("Dreamy")
-                                .setContentText("Miss you!");
-                // When the app launches by a notification, starts the intended activity
-                Intent resultIntent = new Intent(NotificationJobService.this, MainActivity.class);
-                // TaskStackBuilder here only acts as an example. The purpose is to make the app go back from
-                // the activity opened by clicking on the notification to the main activity when the back button is pressed.
-                // TaskStackBuilder describes the activity chain.
-                // In real usage case, a relationship like below should be registered in the manifest.
-                // <activity android:name=".MessageActivity" android:parentActivityName=".MainActivity"/>
-                TaskStackBuilder stackBuilder = TaskStackBuilder.create(NotificationJobService.this);
-                stackBuilder.addParentStack(MainActivity.class);
-                stackBuilder.addNextIntent(resultIntent);
-                PendingIntent resultPendingIntent =
-                        stackBuilder.getPendingIntent(
-                                0,
-                                PendingIntent.FLAG_UPDATE_CURRENT
-                        );
-                mBuilder.setContentIntent(resultPendingIntent);
-                NotificationManager mNotificationManager =
-                        (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                // channel is required for Oreo
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    NotificationChannel channel = new NotificationChannel(Constants.NOTIFICATION_CHANNEL_ID,
-                            Constants.NOTIFICATION_CHANNEL_NAME,
-                            NotificationManager.IMPORTANCE_DEFAULT);
-                    mNotificationManager.createNotificationChannel(channel);
-                }
-                mNotificationManager.notify(1, mBuilder.build());
+                postNotification();
             }
         }
         return false;
@@ -78,5 +48,8 @@ public class NotificationJobService extends JobService {
         return true;
     }
 
-
+    private void postNotification() {
+        NotificationHelper notificationHelper = new NotificationHelper(this);
+        notificationHelper.notify(101, "Dreamy", "Miss you!");
+    }
 }
