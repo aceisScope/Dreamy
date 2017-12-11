@@ -8,9 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.binghui.binghuiliu.dreamy.R;
 import com.binghui.binghuiliu.dreamy.bean.Shot;
+import com.binghui.binghuiliu.dreamy.util.notification.NotificationHelper;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
@@ -34,6 +36,9 @@ public class MainFragment extends Fragment implements ShotsContract.View, MainAd
     @BindInt(R.integer.column_count)
     int columnCount;
 
+    @BindView(R.id.notification_button)
+    Button notificationButton;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -41,6 +46,14 @@ public class MainFragment extends Fragment implements ShotsContract.View, MainAd
         ButterKnife.bind(this, view);
 
         initRecyclerView();
+
+        notificationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NotificationHelper notificationHelper = new NotificationHelper(getActivity());
+                notificationHelper.notify(101, "Dreamy", "Test!");
+            }
+        });
 
         return view;
     }

@@ -3,13 +3,17 @@ package com.binghui.binghuiliu.dreamy.util.notification;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 
 import com.binghui.binghuiliu.dreamy.R;
+import com.binghui.binghuiliu.dreamy.main.MainActivity;
 
 /**
  * Created by binghuiliu on 11/12/2017.
@@ -45,24 +49,47 @@ public class NotificationHelper extends ContextWrapper {
     }
 
     private Notification getNotification(String title, String body) {
+        /*
+            TaskStackBuilder here only acts as an example. The purpose is to make the app go back from
+            the activity opened by clicking on the notification to the main activity when the back button is pressed.
+            TaskStackBuilder describes the activity chain.
+            In real usage case, a relationship like below should be registered in the manifest.
+            <activity android:name=".MessageActivity" android:parentActivityName=".MainActivity"/>
+        */
+        Intent resultIntent = new Intent(this, MainActivity.class);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addParentStack(MainActivity.class);
+        stackBuilder.addNextIntent(resultIntent);
+        PendingIntent resultPendingIntent =
+                stackBuilder.getPendingIntent(
+                        0,
+                        PendingIntent.FLAG_UPDATE_CURRENT
+                );
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             return new Notification.Builder(getApplicationContext(), CHANNEL_ID)
                     .setContentTitle(title)
                     .setContentText(body)
-                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setSmallIcon(getSmallIcon())
                     .setAutoCancel(true)
+                    .setContentIntent(resultPendingIntent)
                     .build();
         } else {
             return new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
                     .setContentTitle(title)
                     .setContentText(body)
-                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setSmallIcon(getSmallIcon())
                     .setAutoCancel(true)
+                    .setContentIntent(resultPendingIntent)
                     .build();
         }
     }
 
-    public void notify(int channelId, String title, String body) {
-        getManager().notify(channelId, getNotification(title, body));
+    private int getSmallIcon() {
+        return android.R.drawable.stat_notify_chat;
+    }
+
+    public void notify(int notificationId, String title, String body) {
+        getManager().notify(notificationId, getNotification(title, body));
     }
 }
