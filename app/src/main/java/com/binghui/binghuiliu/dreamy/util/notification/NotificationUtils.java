@@ -15,8 +15,9 @@ import timber.log.Timber;
  */
 
 public class NotificationUtils {
+
+    // command to force fire job: adb shell cmd jobscheduler run -f com.binghui.binghuiliu.dreamy 1001
     public static void scheduleNotifications(Context context) {
-        // TODO: it's not working
         PreferenceManager.getDefaultSharedPreferences(context).edit().putLong(Constants.LAST_LAUNCH, System.currentTimeMillis()).apply();
 
         final int JOB_ID = 1001;

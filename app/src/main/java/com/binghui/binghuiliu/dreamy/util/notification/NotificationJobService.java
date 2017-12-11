@@ -32,10 +32,13 @@ public class NotificationJobService extends JobService {
 
     @Override
     public boolean onStartJob(JobParameters jobParameters) {
+        Timber.d("NotificationJobService started");
         long lastLaunchTime = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getLong(Constants.LAST_LAUNCH, -1);
         if(lastLaunchTime > 0) {
             long intervalSinceLastLaunch = System.currentTimeMillis() - lastLaunchTime;
-            postNotification();
+            if(intervalSinceLastLaunch > Constants.NOTIFICATION_PERIOD) {
+                postNotification();
+            }
         }
         return false;
     }

@@ -36,9 +36,6 @@ public class MainFragment extends Fragment implements ShotsContract.View, MainAd
     @BindInt(R.integer.column_count)
     int columnCount;
 
-    @BindView(R.id.notification_button)
-    Button notificationButton;
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -46,14 +43,6 @@ public class MainFragment extends Fragment implements ShotsContract.View, MainAd
         ButterKnife.bind(this, view);
 
         initRecyclerView();
-
-        notificationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NotificationHelper notificationHelper = new NotificationHelper(getActivity());
-                notificationHelper.notify(101, "Dreamy", "Test!");
-            }
-        });
 
         return view;
     }
