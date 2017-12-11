@@ -1,4 +1,4 @@
-package com.binghui.binghuiliu.dreamy.util.jobs;
+package com.binghui.binghuiliu.dreamy.util.notification;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -77,4 +77,6 @@ public class NotificationJobService extends JobService {
     public boolean onStopJob(JobParameters jobParameters) {
         return true;
     }
+
+
 }

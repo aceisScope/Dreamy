@@ -22,7 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".util.jobs.NotificationJobService" android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service android:name=".util.notification.NotificationJobService" android:permission="android.permission.BIND_JOB_SERVICE" />
     </application>
 
 </manifest>

@@ -8,7 +8,7 @@ import android.content.Context;
 import android.preference.PreferenceManager;
 import com.binghui.binghuiliu.dreamy.BuildConfig;
 import com.binghui.binghuiliu.dreamy.util.Constants;
-import com.binghui.binghuiliu.dreamy.util.jobs.NotificationJobService;
+import com.binghui.binghuiliu.dreamy.util.notification.NotificationJobService;
 import com.facebook.stetho.Stetho;
 
 import timber.log.Timber;
