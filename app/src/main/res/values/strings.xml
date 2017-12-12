@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Dreamy</string>
     <string name="image_shot">This is a Dridddle shot. </string>
+    <string-array name="menu_items">
+        <item>Menu Item 0</item>
+        <item>Menu Item 1</item>
+        <item>Menu Item 2</item>
+    </string-array>
 </resources>
