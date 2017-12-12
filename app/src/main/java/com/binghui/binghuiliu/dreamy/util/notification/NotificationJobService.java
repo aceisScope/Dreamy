@@ -37,6 +37,7 @@ public class NotificationJobService extends JobService {
         if(lastLaunchTime > 0) {
             long intervalSinceLastLaunch = System.currentTimeMillis() - lastLaunchTime;
             if(intervalSinceLastLaunch > Constants.NOTIFICATION_PERIOD) {
+                Timber.d("NotificationJobService push notification: %ld after launch %ld", intervalSinceLastLaunch, lastLaunchTime);
                 postNotification();
             }
         }

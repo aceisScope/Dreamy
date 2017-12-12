@@ -30,6 +30,7 @@ public class NotificationUtils {
                     .setPeriodic(Constants.NOTIFICATION_PERIOD) //schedule the job to launch in the given time. note on Nougat it can't be less than 15 mins. https://stackoverflow.com/questions/38344220/job-scheduler-not-running-on-android-n
                     //.setMinimumLatency(15000)
                     .build();
+            jobScheduler.cancelAll(); // cancel all previously scheduled jobs
             jobScheduler.schedule(jobInfo);
         } catch (Exception ex) {
             Timber.e("scheduleNotifications failure");
