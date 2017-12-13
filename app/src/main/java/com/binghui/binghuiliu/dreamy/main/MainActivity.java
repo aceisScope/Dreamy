@@ -1,11 +1,13 @@
 package com.binghui.binghuiliu.dreamy.main;
 
 import android.content.res.Configuration;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -38,18 +40,15 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setupComponent();
 
-//        MainFragment mainFragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.main_fragment_container);
-//        shotsPresenter.attachView(mainFragment);
-//        shotsPresenter.getShotList();
-
         setupToolbar();
         setupDrawerToggle();
+        setupFragment(0);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        shotsPresenter.detachView();
+        shotsPresenter.detachView();
     }
 
     @Override
@@ -59,12 +58,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Pass the event to ActionBarDrawerToggle, if it returns
+        // true, then it has handled the app icon touch event
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        // Handle your other action bar items...
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
-    protected void setupComponent() {
+    private void setupComponent() {
         DaggerShotsPresenterComponent
                 .builder()
                 .applicationModule(new ApplicationModule(getApplication()))
@@ -73,13 +83,13 @@ public class MainActivity extends AppCompatActivity {
                 .inject(this);
     }
 
-    protected void setupToolbar(){
+    private void setupToolbar(){
         // These lines are needed to display the top-left hamburger button
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    void setupDrawerToggle(){
+    private void setupDrawerToggle(){
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.app_name, R.string.app_name) {
             @Override
             public void onDrawerClosed(View drawerView) {
@@ -89,9 +99,18 @@ public class MainActivity extends AppCompatActivity {
             public void onDrawerOpened(View drawerView) {
             }
         };
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        mDrawerLayout.addDrawerListener(mDrawerToggle);
         // This is necessary to change the icon of the Drawer Toggle upon state change.
         mDrawerToggle.syncState();
     }
 
+
+    // Activity creates the Presenters and Views and connect them.
+    private void setupFragment(int index) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        MainFragment mainFragment = new MainFragment();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, mainFragment).commit();
+        shotsPresenter.attachView(mainFragment);
+        shotsPresenter.getShotList();
+    }
 }
