@@ -63,7 +63,7 @@ public abstract class Images implements Parcelable {
         }
     }
 
-    public static Function<Query, Images> MAPPER = new Function<Query, Images>() {
+    public static final Function<Query, Images> MAPPER = new Function<Query, Images>() {
         @Override
         public Images apply(Query query) {
             Cursor cursor = query.run();
